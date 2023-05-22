@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "10.0"
 
   s.source       = { :git => "https://github.com/Khan/SwiftTweaks.git", :tag => "v4.1.2", :submodules => true }
-  s.source_files = "SwiftTweaks/**/*.swift"
-  s.resource_bundles = { 'SwiftTweaks' => ['SwiftTweaks/Media.xcassets/**/*'] }
+  s.source_files = "SwiftTweaks/Sources/**/*.swift"
+  s.resource_bundles = { 'SwiftTweaks' => ['SwiftTweaks/Assets/**/*'] }
 
   s.swift_version = "5.0"
   
