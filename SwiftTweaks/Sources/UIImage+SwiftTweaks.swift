@@ -22,13 +22,17 @@ internal extension UIImage {
 		self.init(inThisBundleNamed: swiftTweaksImage.rawValue)!
 	}
 
-	// NOTE (bryan): if we just used UIImage(named:_), we get crashes when running in other apps!
-	// (Why? Because by default, iOS searches in your app's bundle, but we need to redirect that to the bundle associated with SwiftTweaks
+    // Use different bundle
 	private convenience init?(inThisBundleNamed imageName: String) {
 		#if SWIFT_PACKAGE
 		self.init(named: imageName, in: Bundle.module, compatibleWith: nil)
 		#else
-		self.init(named: imageName, in: Bundle(for: TweakTableCell.self), compatibleWith: nil) // NOTE (bryan): Could've used any class in SwiftTweaks here.
+        let path = Bundle.main.bundlePath.appending("/SwiftTweaks.bundle")
+        guard let bundle = Bundle(path: path) else {
+            fatalError("Missing SwiftTweaks bundle.")
+            return nil
+        }
+		self.init(named: imageName, in: bundle, compatibleWith: nil) // NOTE (bryan): Could've used any class in SwiftTweaks here.
 		#endif
 	}
 
